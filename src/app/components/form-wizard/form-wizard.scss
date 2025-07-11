@@ -1,0 +1,177 @@
+.wizard {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.steps div {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #e5e7eb;
+  color: #6b7280;
+  font-weight: 500;
+  transition: color 0.2s, border-color 0.2s;
+}
+.steps .active {
+  color: #4f46e5;
+  border-bottom: 2px solid #4f46e5;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.error {
+  color: #dc2626;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+.wizard-actions button {
+  flex: 1;
+  padding: 0.75rem 0;
+  border-radius: 6px;
+  border: none;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.wizard-actions button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.wizard-actions button[type="button"] {
+  background: #e5e7eb;
+  color: #1e293b;
+}
+.wizard-actions button[type="button"]:not(:disabled):hover {
+  background: #d1d5db;
+}
+.wizard-actions button[type="submit"]:not(:disabled):hover {
+  background: #4338ca;
+} 
+
+.book-select-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.autocomplete-list {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 20;
+  width: 320px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.autocomplete-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.autocomplete-item:hover {
+  background: #f3f4f6;
+}
+.autocomplete-item img {
+  border-radius: 3px;
+  background: #f3f3f3;
+}
+.selected-book {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f3f4f6;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+.selected-book img {
+  border-radius: 3px;
+  background: #f3f3f3;
+}
+.selected-book .title {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.selected-book .authors {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+.selected-book button {
+  margin-left: 0.5rem;
+  background: #e5e7eb;
+  color: #1e293b;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.selected-book button:hover {
+  background: #d1d5db;
+} 
+
+.selected-books-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+}
+.selected-books-list li {
+  background: #f3f4f6;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.97rem;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 4px #4F46E508;
+}
+.book-title {
+  font-weight: 600;
+  color: #4F46E5;
+}
+.book-authors {
+  color: #6B7280;
+  font-size: 0.95em;
+} 

@@ -1,0 +1,27 @@
+<div class="report-generator">
+  <div class="report-controls">
+    <label for="lang">Dil / Language:</label>
+    <select id="lang" [(ngModel)]="lang">
+      <option value="tr">Türkçe</option>
+      <option value="en">English</option>
+    </select>
+    <button (click)="exportDocx()">DOCX Export</button>
+    <button (click)="exportPDF()">PDF Export</button>
+  </div>
+  <div class="report-content">
+    <h2>{{ getAPAHeader() }}</h2>
+    <p>{{ getMockComment() }}</p>
+    <h3>{{ lang() === 'tr' ? 'Tablo 1. Kitap İstatistikleri' : 'Table 1. Book Statistics' }}</h3>
+    <ul>
+      <li>{{ lang() === 'tr' ? 'Toplam Kitap' : 'Total Books' }}: {{ getStats().total }}</li>
+      <li>{{ lang() === 'tr' ? 'Ortalama Yazar' : 'Avg. Authors' }}: {{ getStats().avgAuthors | number:'1.1-1' }}</li>
+      <li>{{ lang() === 'tr' ? 'Ortalama Kategori' : 'Avg. Categories' }}: {{ getStats().avgCategories | number:'1.1-1' }}</li>
+    </ul>
+    <h3>{{ lang() === 'tr' ? 'En Popüler Kategoriler' : 'Top Categories' }}</h3>
+    <ul>
+      <li *ngFor="let cat of getTopCategories(5); let i = index">{{ i + 1 }}. {{ cat }}</li>
+    </ul>
+    <h3>{{ lang() === 'tr' ? 'Kaynakça' : 'References' }}</h3>
+    <ul><li>Google Books API</li></ul>
+  </div>
+</div> 

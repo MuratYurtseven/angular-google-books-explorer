@@ -1,0 +1,75 @@
+<div class="wizard">
+  <div class="steps">
+    <div [class.active]="step() === 0">1. Personal Info</div>
+    <div [class.active]="step() === 1">2. Books</div>
+    <div [class.active]="step() === 2">3. Recipient</div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div *ngIf="step() === 0">
+      <label>Full Name</label>
+      <input formControlName="name" />
+      <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Required. No special characters.
+      </div>
+      <label>Email</label>
+      <input formControlName="email" type="email" />
+      <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Enter a valid email.
+      </div>
+    </div>
+    <div *ngIf="step() === 1">
+      <label>Books</label>
+      <div formArrayName="books">
+        <div *ngFor="let bookCtrl of books.controls; let i = index" [formGroupName]="i" class="book-select-row">
+          <ng-container *ngIf="!bookCtrl.value.book">
+            <input [formControlName]="'search'" (input)="onBookSearch(i, bookCtrl.value.search)" placeholder="Search on Google Books..." />
+            <div class="autocomplete-list" *ngIf="bookOptions[i] | async as options">
+              <div *ngFor="let option of options" class="autocomplete-item" (click)="selectBook(i, option)">
+                <img *ngIf="option.thumbnail" [src]="option.thumbnail" width="32" height="48" />
+                <span>{{ option.title }}</span>
+                <span class="authors">{{ option.authors?.join(', ') }}</span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="bookCtrl.value.book">
+            <div class="selected-book">
+              <img *ngIf="bookCtrl.value.book.thumbnail" [src]="bookCtrl.value.book.thumbnail" width="40" height="60" />
+              <div>
+                <div class="title">{{ bookCtrl.value.book.title }}</div>
+                <div class="authors">{{ bookCtrl.value.book.authors?.join(', ') }}</div>
+              </div>
+              <button type="button" (click)="bookCtrl.patchValue({ book: null, search: '' })">Change</button>
+              <button type="button" (click)="removeBook(i)">Remove</button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <button type="button" (click)="addBook()">Add Book</button>
+      <div class="error" *ngIf="books.touched && books.invalid">Add at least one book.</div>
+    </div>
+    <div *ngIf="step() === 2">
+      <label>Recipient's Email</label>
+      <input [(ngModel)]="recipientEmail" name="recipientEmail" type="email" placeholder="example@email.com" required style="margin-bottom:1rem;" />
+      <div class="error" *ngIf="isRecipientEmailInvalid">Enter a valid email.</div>
+      <div class="summary-block">
+        <h4>Selected Books</h4>
+        <ul class="selected-books-list">
+          <li *ngFor="let book of selectedBooks">
+            <span class="book-title">{{ book.title }}</span>
+            <span class="book-authors" *ngIf="book.authors?.length">- {{ book.authors.slice(0,2).join(', ') }}<span *ngIf="book.authors.length > 2">, ...</span></span>
+          </li>
+        </ul>
+        <h4>Report Summary</h4>
+        <div class="report-summary">{{ reportSummary }}</div>
+        <label>Additional Message</label>
+        <textarea [(ngModel)]="extraMessage" name="extraMessage" rows="3" placeholder="Any note or message you want to add..."></textarea>
+      </div>
+    </div>
+    <div class="wizard-actions">
+      <button type="button" (click)="prevStep()" [disabled]="step() === 0">Back</button>
+      <button type="button" (click)="nextStep()" *ngIf="step() < 2" [disabled]="!isStepValid()">Next</button>
+      <button type="submit" *ngIf="step() === 2" [disabled]="!form.valid">Send</button>
+    </div>
+  </form>
+</div> 

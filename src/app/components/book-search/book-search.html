@@ -1,0 +1,72 @@
+<div class="main-layout">
+  <nav class="sidebar" [class.closed]="!sidebarOpen" (mouseenter)="sidebarOpen = true" (mouseleave)="sidebarOpen = false">
+    <div class="sidebar-toggle" (click)="sidebarOpen = !sidebarOpen">
+      <span class="menu-icon">&#9776;</span>
+    </div>
+    <ul *ngIf="sidebarOpen">
+      <li [class.active]="activeTab === 'dashboard'" (click)="activeTab = 'dashboard'">My Books</li>
+      <li [class.active]="activeTab === 'chart'" (click)="activeTab = 'chart'">Book Insights</li>
+    </ul>
+  </nav>
+  <div class="main-content">
+    <ng-container *ngIf="activeTab === 'dashboard'">
+      <div class="search-controls">
+        <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search books..." />
+        <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+          <option value="">All Categories</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+      <div *ngIf="error$ | async as error" class="error-message">
+        {{ error }}
+      </div>
+      <div *ngIf="loading$ | async">Loading...</div>
+      <div class="book-list">
+        <div *ngFor="let book of books$ | async" class="book-card">
+          <img *ngIf="book.thumbnail" [src]="book.thumbnail" alt="{{ book.title }}" />
+          <div class="book-info">
+            <h3>{{ book.title }}</h3>
+            <div *ngIf="book.authors.length">
+              <span *ngFor="let author of book.authors.slice(0, 4)" class="badge">{{ author }}</span>
+              <span *ngIf="book.authors.length > 4" class="badge text-muted" style="background:#E5E7EB;color:#4F46E5;">+{{ book.authors.length - 4 }}</span>
+            </div>
+            <div *ngIf="book.categories.length">
+              <span *ngFor="let cat of book.categories" class="badge bg-accent">{{ cat }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
+        <span>Page {{ currentPage }} / {{ totalPages }}</span>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">&gt;</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTab === 'chart'">
+      <div class="dashboard-controls">
+        <label>Data Source:</label>
+        <select [(ngModel)]="dashboardSource" (change)="onDashboardSourceChange()">
+          <option value="popular">Top 100 Popular Books</option>
+          <option value="newest">Top 100 Newest Books</option>
+          <option value="ebooks">Only eBooks</option>
+          <option value="free-ebooks">Free eBooks</option>
+          <option value="paid-ebooks">Printed Books</option>
+          <option value="magazines">Magazines</option>
+          <option value="full">Full View Only</option>
+          <option value="partial">Preview Only</option>
+        </select>
+        <input type="text" [(ngModel)]="chartKeyword" (keyup.enter)="onDashboardSourceChange()" placeholder="Keyword (e.g. science, history)" style="margin-left:1rem;min-width:200px;" />
+        <button (click)="onDashboardSourceChange()">Search</button>
+      </div>
+      <app-dashboard [books$]="books$" [loading$]="loading$"></app-dashboard>
+      <app-report-generator [books]="chartBooks" [chartType]="chartType" [chartData]="chartData"></app-report-generator>
+      <app-form-wizard [selectedBooks]="chartBooks" [reportSummary]="getReportSummary()"></app-form-wizard>
+    </ng-container>
+    <ng-container *ngIf="activeTab === 'form'">
+      <app-form-wizard></app-form-wizard>
+    </ng-container>
+    <ng-container *ngIf="activeTab === 'report'">
+      <app-report-generator [books]="books" [chartType]="chartType" [chartData]="chartData"></app-report-generator>
+    </ng-container>
+  </div>
+</div>

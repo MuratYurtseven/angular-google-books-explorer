@@ -1,1 +1,119 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+
+// === Global Color Palette ===
+:root {
+  --color-bg: #F9FAFB;
+  --color-card: #FFFFFF;
+  --color-primary: #4F46E5;
+  --color-accent: #22C55E;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 700;
+  margin-top: 0;
+  letter-spacing: 0.01em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.7rem;
+}
+
+input, select, button, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  color: var(--color-text);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px #6366f133;
+}
+
+button {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+button:hover, button:focus {
+  background: #6366f1;
+  box-shadow: 0 4px 16px #6366f122;
+  transform: translateY(-2px) scale(1.03);
+}
+
+::-webkit-input-placeholder { color: var(--color-text-muted); }
+::-moz-placeholder { color: var(--color-text-muted); }
+:-ms-input-placeholder { color: var(--color-text-muted); }
+::placeholder { color: var(--color-text-muted); }
+
+// === Card Base Style ===
+.card, .book-card {
+  background: var(--color-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 16px #4F46E508;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid #E5E7EB;
+}
+.card:hover, .book-card:hover {
+  box-shadow: 0 8px 32px #4F46E522;
+  transform: translateY(-4px) scale(1.02);
+}
+
+// === Badge ===
+.badge {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.85rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.2rem;
+  box-shadow: 0 2px 8px #4F46E510;
+  animation: popIn 0.5s;
+}
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+// === Utility Classes ===
+.text-muted { color: var(--color-text-muted); }
+.bg-primary { background: var(--color-primary); color: #fff; }
+.bg-accent { background: var(--color-accent); color: #fff; }
+.rounded { border-radius: 8px; }
+.shadow { box-shadow: 0 2px 16px #4F46E508; }
+
+// === Scrollbar ===
+::-webkit-scrollbar { width: 8px; background: #F3F4F6; }
+::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 8px; }

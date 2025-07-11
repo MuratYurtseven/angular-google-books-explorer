@@ -1,0 +1,45 @@
+<div class="dashboard">
+  <ng-container *ngIf="loading$ | async; else statsBlock">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3]">&nbsp;</div>
+  </ng-container>
+  <ng-template #statsBlock>
+    <ng-container *ngIf="books$ | async as books">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-label">Toplam Kitap</div>
+          <div class="stat-value">{{ getStats(books).total }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ortalama Yazar</div>
+          <div class="stat-value">{{ getStats(books).avgAuthors | number:'1.1-1' }}</div>
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="getStats(books).avgAuthors * 20"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ortalama Kategori</div>
+          <div class="stat-value">{{ getStats(books).avgCategories | number:'1.1-1' }}</div>
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="getStats(books).avgCategories * 50"></div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-controls">
+        <label for="chartType">Grafik Türü:</label>
+        <select id="chartType" [(ngModel)]="chartType">
+          <option *ngFor="let t of chartTypes" [value]="t.value">{{ t.label }}</option>
+        </select>
+      </div>
+      <div class="chart-area">
+        <canvas baseChart
+          [data]="chartData"
+          [type]="chartType"
+          [options]="chartOptions"
+          (chartHover)="null"
+          (chartClick)="null">
+        </canvas>
+      </div>
+      <ng-container *ngIf="prepareChartData(books)"></ng-container>
+    </ng-container>
+  </ng-template>
+</div> 

@@ -1,0 +1,61 @@
+.report-generator {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+}
+.report-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.report-controls select {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.report-controls button {
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.report-controls button:hover {
+  background: #4338ca;
+}
+.report-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.report-content h3 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.report-content ul {
+  margin: 0 0 1rem 1.5rem;
+  padding: 0;
+}
+.report-content li {
+  margin-bottom: 0.25rem;
+}
+@media (max-width: 700px) {
+  .report-generator {
+    padding: 1rem 0.5rem;
+  }
+  .report-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+} 
