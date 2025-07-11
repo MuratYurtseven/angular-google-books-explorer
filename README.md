@@ -1,3 +1,22 @@
+# Angular Google Books Explorer
+
+## Project Overview & Features
+
+This project is a modern, responsive Angular application for exploring books using the Google Books API. It includes the following features:
+
+- **Modern Minimal UI:** Clean, soft color palette, beautiful spacing, and smooth animations.
+- **English Language:** All user-facing text and UI is in English.
+- **Book Search & Filtering:** Search books by keyword, filter by category, and paginate results.
+- **5x5 Book Grid:** Displays 25 books per page in a 5-column responsive grid.
+- **Book Cards:** Each card shows the book cover, title, authors (with badges), and categories (with colored badges).
+- **Book Insights:** Data visualization with interactive charts (bar, pie, line) for book analytics and category distribution.
+- **Report Generator:** Export book analytics and statistics as DOCX or PDF, with APA-style summary and top categories.
+- **Send Report:** Fill out a multi-step form to send the latest report and selected books to any email, with an additional message.
+- **Fully Responsive:** Works great on desktop, tablet, and mobile.
+- **Error Handling:** User-friendly error messages and loading states.
+
+---
+
 # AngularGoogleBooksExplorer
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
