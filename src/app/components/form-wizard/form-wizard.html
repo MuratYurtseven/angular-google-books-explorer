@@ -28,7 +28,7 @@
               <div *ngFor="let option of options" class="autocomplete-item" (click)="selectBook(i, option)">
                 <img *ngIf="option.thumbnail" [src]="option.thumbnail" width="32" height="48" />
                 <span>{{ option.title }}</span>
-                <span class="authors">{{ option.authors?.join(', ') }}</span>
+               <span class="authors">{{ option.authors.join(', ') }}</span>
               </div>
             </div>
           </ng-container>
